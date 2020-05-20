@@ -2,15 +2,15 @@ import json
 from flask import request
 from main import mongo
 from flask_restful import Resource
-from ..schemas.users import UserSchema
+from ..schemas.location_lat import LocationLatSchema
 from ..services.db import DbOperations
 
 
-users = mongo.ohio.users
-db = DbOperations(collections=users, schema=UserSchema)
+location_lat = mongo.ohio.location_lat
+db = DbOperations(collections=location_lat, schema=LocationLatSchema)
 
 
-class UserList(Resource):
+class LocationLatList(Resource):
     def get(self):
         return db.find_all()
 
@@ -19,20 +19,20 @@ class UserList(Resource):
         return db.insert(payload)
 
 
-class User(Resource):
+class LocationLat(Resource):
     def get(self, user_id):
         return db.find_one(
-            criteria={'user_id': user_id}
+            criteria={'location_id': location_id}
         )
 
-    def put(self, user_id):
+    def put(self, location_id):
         payload = request.get_json()
         return db.update(
-            criteria={'user_id': user_id},
+            criteria={'location_id': location_id},
             updated_value=payload
         )
 
-    def delete(self, user_id):
+    def delete(self, location_id):
         return db.delete(
-            criteria={'user_id': user_id}
+            criteria={'location_id': location_id}
         )
