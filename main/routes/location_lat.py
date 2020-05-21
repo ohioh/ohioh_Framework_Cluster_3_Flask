@@ -6,7 +6,7 @@ from ..schemas.location_lat import LocationLatSchema
 from ..services.db import DbOperations
 
 
-location_lat = mongo.ohio.location_lat
+location_lat = mongo.ohioh.location_lat
 db = DbOperations(collections=location_lat, schema=LocationLatSchema)
 
 
@@ -20,7 +20,7 @@ class LocationLatList(Resource):
 
 
 class LocationLat(Resource):
-    def get(self, user_id):
+    def get(self, location_id):
         return db.find_one(
             criteria={'location_id': location_id}
         )
