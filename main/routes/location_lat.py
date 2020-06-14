@@ -22,17 +22,17 @@ class LocationLatList(Resource):
 class LocationLat(Resource):
     def get(self, location_id):
         return db.find_one(
-            criteria={'_id': ObjectId(location_id)}
+            criteria={"location_id": location_id}
         )
 
     def put(self, location_id):
         payload = request.get_json()
         return db.update(
-            criteria={'_id': ObjectId(location_id)},
-            updated_value=payload
+            criteria={"location_id": location_id},
+            update=payload
         )
 
     def delete(self, location_id):
         return db.delete(
-            criteria={'_id': ObjectId(location_id)}
+            criteria={"location_id": location_id}
         )
