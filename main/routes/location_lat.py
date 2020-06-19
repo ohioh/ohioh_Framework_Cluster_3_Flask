@@ -20,19 +20,19 @@ class LocationLatList(Resource):
 
 
 class LocationLat(Resource):
-    def get(self, location_id):
+    def get(self, user_id):
         return db.find_one(
-            criteria={"location_id": location_id}
+            criteria={"user_id": user_id}
         )
 
-    def put(self, location_id):
+    def put(self, user_id):
         payload = request.get_json()
         return db.update(
-            criteria={"location_id": location_id},
+            criteria={"user_id": user_id},
             update=payload
         )
 
-    def delete(self, location_id):
+    def delete(self, user_id):
         return db.delete(
-            criteria={"location_id": location_id}
+            criteria={"user_id": user_id}
         )
